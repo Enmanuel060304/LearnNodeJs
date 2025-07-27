@@ -1,0 +1,10 @@
+GET http://localhost:3000/api/notas
+
+
+POST http://localhost:3000/api/notas
+Content-Type: application/json
+
+{
+  "title": "New Note",
+  "content": "Content of the new note"
+}
