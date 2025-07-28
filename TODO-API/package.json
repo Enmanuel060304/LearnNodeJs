@@ -1,0 +1,25 @@
+{
+  "name": "to-do-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.5"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.1",
+    "standard": "^17.1.2"
+  }
+}
