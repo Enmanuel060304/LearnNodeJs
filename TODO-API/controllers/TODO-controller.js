@@ -4,27 +4,47 @@ export class TODOController {
   }
 
   getAllTodos = async (req, res) => {
-    const todos = await this.todoService.findAll()
-    res.json(todos)
+    try {
+      const todos = await this.todoService.getAllTodos()
+      res.json(todos)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
   }
 
   getTodoById = async (req, res) => {
-    const todo = await this.todoService.getTodoById(req.params.id)
-    res.json(todo)
+    try {
+      const todo = await this.todoService.getTodoById(req.params.id)
+      res.json(todo)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
   }
 
   updateTodo = async (req, res) => {
-    const updatedTodo = await this.todoService.updateTodo(req.params.id, req.body)
-    res.json(updatedTodo)
+    try {
+      const todo = await this.todoService.updateTodo(req.params.id, req.body)
+      res.json(todo)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
   }
 
   createTodo = async (req, res) => {
-    const newTodo = await this.todoService.createTodo(req.body)
-    res.status(201).json(newTodo)
+    try {
+      const newTodo = await this.todoService.createTodo(req.body)
+      res.status(201).json(newTodo)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
   }
 
   deleteTodo = async (req, res) => {
-    await this.todoService.deleteTodo(req.params.id)
-    res.status(204).send()
+    try {
+      await this.todoService.deleteTodo(req.params.id)
+      res.status(204).json({ message: 'Todo deleted successfully' })
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
   }
 }

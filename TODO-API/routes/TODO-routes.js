@@ -1,15 +1,14 @@
 import { Router } from 'express'
-import { TODOController } from '../controllers/TODO-controller.js'
+import { safeValidation, partialValidation } from './../middlewares/validation.js'
 
-export const createTodoRouter = ({ todoModel }) => {
+export const createTodoRouter = (todoController) => {
   const todoRouter = Router()
-  const todoController = new TODOController({ todoModel })
 
   todoRouter.get('/', todoController.getAllTodos)
   todoRouter.get('/:id', todoController.getTodoById)
-  todoRouter.patch('/:id', todoController.updateTodo)
-  todoRouter.post('/', todoController.createTodo)
-  todoRouter.delete('/:id', todoController.deleteTodo)
+  todoRouter.patch('/:id', partialValidation, todoController.updateTodo)
+  todoRouter.post('/', safeValidation, todoController.createTodo)
+  todoRouter.delete('/:id', partialValidation, todoController.deleteTodo)
 
   return todoRouter
 }

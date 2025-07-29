@@ -6,11 +6,19 @@ export class TodoRepository {
   }
 
   async getTodoById (id) {
-    return await TodoModel.findById(id)
+    const todo = await TodoModel.findById(id)
+    if (!todo) throw new Error('Todo not found')
+    return todo
   }
 
   async updateTodo (id, data) {
-    return await TodoModel.findByIdAndUpdate(id, data, { new: true })
+    const todo = await TodoModel.findByIdAndUpdate(id, data, {
+      new: true,
+      runValidators: true
+    })
+
+    if (!todo) throw new Error('Todo not found')
+    return todo
   }
 
   async createTodo (data) {
@@ -19,6 +27,8 @@ export class TodoRepository {
   }
 
   async deleteTodo (id) {
-    return await TodoModel.findByIdAndDelete(id)
+    const deletedTodo = await TodoModel.findByIdAndDelete(id)
+    if (!deletedTodo) throw new Error('Todo not found')
+    return deletedTodo
   }
 }

@@ -10,7 +10,7 @@ import { MONGO_URL } from './utils/config.js'
 // inyecccion manual de dependencias
 const todoRepository = new TodoRepository()
 const todoService = new TodoService({ TodoRepository: todoRepository })
-const todoController = new TODOController(todoService)
+const todoController = new TODOController({ todoService })
 const todoRouter = createTodoRouter(todoController)
 
 const app = express()
