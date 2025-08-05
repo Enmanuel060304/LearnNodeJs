@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
@@ -16,11 +17,16 @@
     "mongoose": "^8.16.5",
     "zod": "4.0.10"
   },
+  "env":{
+    "jest": true
+  },
   "eslintConfig": {
     "extends": "standard"
   },
   "devDependencies": {
     "dotenv": "^17.2.1",
-    "standard": "^17.1.2"
+    "jest": "^30.0.5",
+    "standard": "^17.1.2",
+    "supertest": "^7.1.4"
   }
 }

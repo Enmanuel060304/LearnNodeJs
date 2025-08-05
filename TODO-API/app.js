@@ -5,7 +5,7 @@ import { TodoRepository } from './repository/MongoTodoRepository.js'
 import { TODOController } from './controllers/TODO-controller.js'
 import { TodoService } from './service/todoService.js'
 import mongoose from 'mongoose'
-import { MONGO_URL } from './utils/config.js'
+import { MONGO_URL, PORT } from './utils/config.js'
 
 // inyecccion manual de dependencias
 const todoRepository = new TodoRepository()
@@ -29,4 +29,10 @@ mongoose.connect(MONGO_URL).then(() => {
   console.error('Failed to connect to MongoDB', err)
 })
 
-export { app }
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`)
+})
+
+export {
+  app
+}

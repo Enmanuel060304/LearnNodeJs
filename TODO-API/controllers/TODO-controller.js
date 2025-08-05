@@ -42,7 +42,7 @@ export class TODOController {
   deleteTodo = async (req, res) => {
     try {
       await this.todoService.deleteTodo(req.params.id)
-      res.status(204).json({ message: 'Todo deleted successfully' })
+      res.status(200).json({ message: 'Todo deleted successfully' })
     } catch (error) {
       res.status(500).json({ error: error.message })
     }
