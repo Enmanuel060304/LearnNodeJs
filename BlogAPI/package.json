@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
     "dev": "cross-env NODE_ENV=development node --watch app.js",
-    "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+    "test:coverage": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -20,10 +21,14 @@
     "mongoose": "^8.17.0"
   },
   "devDependencies": {
+    "jest": "^30.0.5",
     "standard": "^17.1.2",
     "supertest": "^7.1.4"
   },
   "eslintConfig": {
     "extends": "standard"
+  },
+  "env": {
+    "jest": true
   }
 }

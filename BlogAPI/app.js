@@ -29,3 +29,7 @@ mongoose.connect(MONGODB_URI).then(() => {
 }).catch((error) => {
   console.error(`algo malo paso y no pudimos conectarnos a mongo db error ${error}`)
 })
+
+export {
+  app
+}
