@@ -10,4 +10,12 @@ export class BlogRepository {
     const newBlog = new BlogModel(body)
     return newBlog.save()
   }
+
+  deleteBlog = async (id) => {
+    const result = await BlogModel.deleteOne({ _id: id })
+    if (result.deletedCount === 0) {
+      throw new Error('Blog not found')
+    }
+    return result
+  }
 }

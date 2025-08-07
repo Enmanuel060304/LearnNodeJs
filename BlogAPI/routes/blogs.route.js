@@ -8,5 +8,7 @@ export const createRouter = (controller) => {
 
   BlogsRouter.post('/', validateBlog, controller.createBlog)
 
+  BlogsRouter.delete('/:id', controller.deleteBlog)
+
   return BlogsRouter
 }

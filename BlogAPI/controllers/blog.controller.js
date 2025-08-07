@@ -20,4 +20,14 @@ export class BlogController {
       res.status(500).json({ error: error.message })
     }
   }
+
+  deleteBlog = async (req, res) => {
+    try {
+      const { id } = req.params
+      await this.BlogService.deleteBlog(id)
+      res.status(204).send()
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 }

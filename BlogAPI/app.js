@@ -24,6 +24,19 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
 })
 
+app.use((req, res) => {
+  res.status(404).json({
+    errorMessage: 'Endpoint not found',
+    endPoints: {
+      blogs: {
+        getAll: '/api/blogs',
+        create: '/api/blogs',
+        delete: '/api/blogs/:id'
+      }
+    }
+  })
+})
+
 mongoose.connect(MONGODB_URI).then(() => {
   console.log('conectado a mongo db')
 }).catch((error) => {
