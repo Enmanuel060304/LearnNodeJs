@@ -30,4 +30,16 @@ export class BlogController {
       res.status(500).json({ error: error.message })
     }
   }
+
+  updateBlog = async (req, res) => {
+    try {
+      const { id } = req.params
+      const newData = req.body
+
+      const updatedBlog = await this.BlogService.updateBlog(id, newData)
+      res.status(200).json(updatedBlog)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 }

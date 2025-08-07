@@ -84,4 +84,24 @@ describe('api tes', () => {
     const existe = blogsDespues.body.some(blog => blog.id === blogAEliminar.id)
     expect(existe).toBe(false)
   })
+
+  test('PUT /api/blogs/:id debe actualizar un blog existente', async () => {
+    const blogsAntes = await request(app).get('/api/blogs')
+    const blogAActualizar = blogsAntes.body[0]
+
+    const nuevosDatos = {
+      title: 'Blog actualizado',
+      author: 'Autor actualizado',
+      url: 'https://example.com/post-blog-actualizado',
+      likes: 10
+    }
+
+    const response = await request(app).put(`/api/blogs/${blogAActualizar.id}`).send(nuevosDatos)
+    expect(response.status).toBe(200)
+    expect(response.body).toMatchObject(nuevosDatos)
+
+    const blogsDespues = await request(app).get('/api/blogs')
+    const blogActualizado = blogsDespues.body.find(blog => blog.id === blogAActualizar.id)
+    expect(blogActualizado).toMatchObject(nuevosDatos)
+  })
 })

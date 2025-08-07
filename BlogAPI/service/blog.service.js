@@ -8,4 +8,6 @@ export class BlogService {
   createBlog = async (body) => this.BlogRepository.createBlog(body)
 
   deleteBlog = async (id) => this.BlogRepository.deleteBlog(id)
+
+  updateBlog = async (id, newData) => this.BlogRepository.updateBlog(id, newData)
 }
