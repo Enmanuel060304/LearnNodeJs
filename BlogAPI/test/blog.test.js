@@ -12,14 +12,13 @@ describe('api tes', () => {
   test('GET deberia tener un id en cada blog', async () => {
     const response = await request(app).get('/api/blogs')
     response.body.forEach(blog => {
-      expect(blog._id).toBeDefined()
-      expect(blog._id).toBeTruthy()
+      expect(blog.id).toBeDefined()
+      expect(blog.id).toBeTruthy()
     })
   })
 
   
     test('POST /api/blogs incrementa el número de blogs y guarda el contenido correctamente', async () => {
-    // Obtener el número de blogs antes del POST
     const blogsAntes = await request(app).get('/api/blogs')
     const totalAntes = blogsAntes.body.length
 
@@ -30,17 +29,14 @@ describe('api tes', () => {
       likes: 5
     }
 
-    // Crear un nuevo blog
     const response = await request(app).post('/api/blogs').send(nuevoBlog)
     expect(response.status).toBe(201)
     expect(response.body).toMatchObject(nuevoBlog)
 
-    // Obtener el número de blogs después del POST
     const blogsDespues = await request(app).get('/api/blogs')
     const totalDespues = blogsDespues.body.length
     expect(totalDespues).toBe(totalAntes + 1)
 
-    // Verificar que el nuevo blog está en la lista
     const existe = blogsDespues.body.some(blog =>
       blog.title === nuevoBlog.title &&
       blog.author === nuevoBlog.author &&
@@ -73,5 +69,19 @@ describe('api tes', () => {
 
     const response = await request(app).post('/api/blogs').send(nuevoBlog)
     expect(response.status).toBe(400)
+  })
+
+  test('DELETE /api/blogs/:id debe eliminar un blog existente', async () => {
+    const blogsAntes = await request(app).get('/api/blogs')
+    const blogAEliminar = blogsAntes.body[0]
+
+    const response = await request(app).delete(`/api/blogs/${blogAEliminar.id}`)
+    expect(response.status).toBe(204)
+
+    const blogsDespues = await request(app).get('/api/blogs')
+    expect(blogsDespues.body).toHaveLength(blogsAntes.body.length - 1)
+
+    const existe = blogsDespues.body.some(blog => blog.id === blogAEliminar.id)
+    expect(existe).toBe(false)
   })
 })
