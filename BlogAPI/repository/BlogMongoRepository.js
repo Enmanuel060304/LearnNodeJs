@@ -19,8 +19,8 @@ export class BlogRepository {
     return result
   }
 
-  updateBlog = async(id, newData) => {
-    const response = await BlogModel.findByIdAndUpdate(id, newData, { new: true })  
+  updateBlog = async (id, newData) => {
+    const response = await BlogModel.findByIdAndUpdate(id, newData, { new: true })
     if (!response) {
       throw new Error('Blog not found')
     }

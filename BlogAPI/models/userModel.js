@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { use } from 'react'
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -22,6 +21,4 @@ userSchema.set('toJSON', {
   }
 })
 
-const User = mongoose.model('User', userSchema)
-
-export default User
+export const UserModel = mongoose.model('User', userSchema)
