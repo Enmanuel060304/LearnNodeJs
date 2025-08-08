@@ -1,4 +1,5 @@
 import { BlogModel } from '../models/blogModel.js'
+import { UserModel } from '../models/userModel.js'
 
 export class BlogRepository {
   getAllBlogs = async () => {
@@ -7,8 +8,19 @@ export class BlogRepository {
   }
 
   createBlog = async (body) => {
-    const newBlog = new BlogModel(body)
-    return newBlog.save()
+    const user = await UserModel.findById(body.userId)
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    const newBlog = await BlogModel.create({
+      ...body,
+      userId: user._id
+    })
+
+    user.blogs = user.blogs.concat(newBlog._id)
+
+    await user.save()
   }
 
   deleteBlog = async (id) => {
