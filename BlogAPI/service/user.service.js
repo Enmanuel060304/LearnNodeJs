@@ -5,5 +5,5 @@ export class UserService {
 
   getAllUsers = async () => await this.userRepository.getAllUsers()
 
-  createuser = async (data) => await this.userRepository.createUser(data)
+  createUser = async (data) => await this.userRepository.createUser(data)
 }
